@@ -1,1 +1,1 @@
-# Python_Linked_List
+# Data structure implementation using Python
