@@ -1,0 +1,204 @@
+
+# Doubly Linked List node structure 
+class Node(object):
+    def __init__(self,value):
+        self.data = value
+        self.prev = None
+        self.next = None
+class DoublyLinkedList(object):
+    
+    # Head/Root node
+    def __init__(self):
+        self.start = None
+   
+   # Node Creation of the doubly Linked List node
+    def create_list(self):
+        n = int(input("Enter no of nodes :  "))
+        if n==0:
+            return
+        data = int (input("Enter the first element to be inserted : "))
+        self.insert_empty(data)
+
+        for i in range(n-1):
+            data = int (input("Enter the next element to be inserted : "))
+            self.insert_end(data)
+            
+            
+    # Display of the Doubly Linked List    
+    def display(self):
+        if self.start == None:
+            print("Empty List")
+            return
+        else:
+            print("List is : ")
+            p = self.start
+            while p != None: 
+                print(p.data, " ", end=" ")
+                p = p.next
+            print()
+    
+    # Counting the nodes in the Doubly Linked List
+    def count_node(self):
+        p = self.start
+        count = 0
+        while p != None:
+            count+=1
+            p = p.next
+        print("Number of nodes in the list = ", count)
+    
+    # Searching an element inside the Doubly Linked List
+    def search(self,x):
+        pos = 1
+        p=self.start
+        while p != None:
+            if p.data == x:
+                print(x, "is at position ", pos)
+                return True
+            pos+=1
+            p = p.next
+        else:
+            print(x, " is not found")
+            return False
+    
+    # Insertion of an element at the beginning
+    def insertion_begin(self,data):
+        temp = Node(data)
+        temp.next = self.start
+        self.start.prev = temp
+        self.start = temp
+    
+    def insert_empty(self,data):
+        temp = Node(data)
+        self.start = temp
+    
+    
+    # Insertion of an element at the end
+    def insert_end(self,data):
+        temp = Node(data)
+        p = self.start
+        while p.next != None:
+            p = p.next
+        p.next = temp
+        temp.prev = p
+    
+    
+    # Insertion of an element at K position        
+    def insert_pos(self,data,k):
+        temp = Node(data)
+        p = self.start
+        while p != None:
+            if p.data == x:
+                break
+            p = p.next
+            
+        if p == None:
+            print(x, " is not found in the list ")
+        else:
+            temp.prev = p
+            temp.next = p.next
+            if p.next != None:
+                p.next.prev = temp
+            p.next = temp
+            
+    
+    # Deletion of an element at the beginning
+    def delete_first(self):
+        if self.start ==  None:
+            return
+        if self.start.next == None:
+            self.start = None
+            return
+        self.start = self.start.next
+        self.start.prev = None
+   
+    # Deletion of an element at the end
+    def delete_last(self):
+        if self.start == None:
+            return
+        if self.start.next == None:
+            self.start = None
+            return
+        p = self.start
+        while p.next != None:
+            p = p.next
+        p.prev.next = None
+    
+    # Deletion of an element at X position
+    def deletion_pos(self,x):
+        if self.start == None:
+            return
+        
+        if self.start.next == None:
+            if self.start.data == x:
+                self.start = None
+            else:
+                print(x, " not found")
+                return
+            
+        if self.start.data == x:
+            self.start = self.start.next
+            self.start.prev = None
+            return
+        
+        p = self.start.next
+        while p.next != None:
+            if p.data == x:
+                break
+            p = p.next
+            
+        if p.next != None:
+            p.prev.next = p.next
+            p.next.prev = p.prev
+        else:
+            if p.data == x:
+                p.prev.next = None
+            else:
+                print(x, " is not found")
+                
+list = DoublyLinkedList()
+
+list.create_list()
+
+while True:
+    print("1. Display List")
+    print("2. Count the nodes")
+    print("3. Search for an element")
+    print("4. Insertion at beginning")
+    print("5. Insertion at end")
+    print("6. Insertion at a position")
+    print("7. Deletion at beginning")
+    print("8. Deletion at end")    
+    print("9. Delete the node by given element value")
+    print("10. Exit")
+    
+    option = int (input("Enter your choice :: "))
+    
+    if option == 1:
+        list.display()
+    elif option == 2:
+        list.count_node()
+    elif option == 3:
+        data = int(input("Enter the element you want to search "))
+        list.search(data)
+    elif option == 4:
+        data = int(input("Enter the element you want to insert "))
+        list.insertion_begin(data)
+    elif option == 5:
+        data = int(input("Enter the element you want to insert "))
+        list.insert_end(data)
+    elif option == 6:
+        data = int(input("Enter the element you want to insert "))
+        x = int(input("Enter the element after which you want to insert "))
+        list.insert_pos(data,x)
+    elif option == 7:
+        list.delete_first()
+    elif option == 8:
+        list.delete_last()
+    elif option == 9:
+        data = int(input("Enter the element you want to delete "))
+        list.deletion_pos(x)
+    elif option == 10:
+        break
+    else:
+        print("Wrong option entered")
+    print()
